@@ -14,10 +14,10 @@ main{
   justify-content: center;
   align-items: flex-start;
 }
-.container{
+.container{ 
   margin-top: 60px;
   width: 400px;
-  height: 300px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -25,6 +25,15 @@ main{
   border-radius: 8px;
   box-shadow: #00000029;
   background-color: #FFFFFF;
+  padding: 32px;
+}
+.inner{
+  width: 100%;
+  /* height: 40vh; */
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .headline{
   font-size: 20px;
@@ -41,9 +50,8 @@ main{
   width: 90%;
   height: auto;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  /* gap: 6px; */
+  gap: 6px;
 }
 .text-input{
   width: 280px;
@@ -123,3 +131,56 @@ main{
   align-items: center;
   color: #6B7280;
 }
+
+.task-item{
+  width: 100%;
+  height: 62px;
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  background-color: #F3F4F6;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  align-items: center;
+  border-radius: 8px;
+}
+.checkbox-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px ;
+  overflow: hidden;
+}
+.checkbox{
+  border-radius: 100px ;
+}
+
+.checkbox:checked + .task-text{
+  text-decoration: line-through;
+}
+
+.delete-btn{
+  width: 64px;
+  height: 32px;
+  background-color: #FEF2F2;
+  color: #EF4444;
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  border-radius: 6px;
+}
+.edit-btn{
+  width: 48px;
+  height: 32px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 6px;
+}
+
+.task-text{
+  font-size: 14px;
+  font-weight: 400;
+}
+

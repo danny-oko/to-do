@@ -30,11 +30,14 @@ function renderTasks() {
   tasks.forEach((task) => {
     tasksContainer.innerHTML += `
       <div class="task-item">
-        <div class="checkbox"></div>
-        <input type= "checkbox" onclick="markAsDone()">  
-        <p>${task.text}</p>
-        <button class="delete-btn" onclick="deleteTask(${task.id})">x</button>
-        <button class="edit-btn" onclick="editTask"(${task.id})"> edit</button>
+        <div class="checkbox-container">
+          <input type= "checkbox" onclick="markAsDone()">  
+          <p>${task.text}</p>
+        </div>
+        <div class="btn-container>
+          <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+          <button class="edit-btn" onclick="editTask"(${task.id})">Edit</button>
+        </div>
       </div>
     `;
   });
@@ -48,9 +51,7 @@ function deleteTask(taskId) {
 }
 
 function markAsDone(){
-  console.log("marked as done");
-
-
+  
 }
 
 renderTasks(); // Load saved tasks
