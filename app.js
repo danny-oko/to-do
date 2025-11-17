@@ -1,7 +1,3 @@
-/* -------------------------------------------------
-   app.js – To-Do List (works with your HTML)
-   ------------------------------------------------- */
-
 const input = document.querySelector(".text-input");
 const addBtn = document.querySelector(".add-btn");
 const tasksContainer = document.querySelector(".tasks");
@@ -14,11 +10,9 @@ const counterContainer = document.querySelector(".counter-container");
 const taskCounter = document.querySelector(".task-counter");
 const clearCompleted = document.querySelector(".clear-completed");
 
-/* ------------------- STATE ------------------- */
 let tasks = [];
 let currentFilter = "all";
 
-/* ------------------- EVENTS ------------------- */
 addBtn.addEventListener("click", addTask);
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") addTask();
@@ -30,7 +24,6 @@ completedFilter.addEventListener("click", () => changeFilter("completed"));
 
 clearCompleted.addEventListener("click", deleteCompletedItems);
 
-/* ------------------- ADD TASK ------------------- */
 function addTask() {
   const txt = input.value.trim();
   if (!txt) return;
@@ -40,7 +33,6 @@ function addTask() {
   render();
 }
 
-/* ------------------- FILTER ------------------- */
 function changeFilter(type) {
   currentFilter = type;
   highlightFilter(type);
@@ -54,7 +46,6 @@ function highlightFilter(type) {
   document.querySelector(`.${type}-text`).classList.add("selected");
 }
 
-/* ------------------- RENDER ------------------- */
 function render() {
   let list = tasks;
 
@@ -95,7 +86,6 @@ function render() {
   updateFooter();
 }
 
-/* ------------------- TOGGLE ------------------- */
 function toggle(id) {
   const t = tasks.find((x) => x.id === id);
   if (t) {
@@ -104,7 +94,6 @@ function toggle(id) {
   }
 }
 
-/* ------------------- DELETE ONE ------------------- */
 function del(id) {
   if (confirm("Delete this task?")) {
     tasks = tasks.filter((t) => t.id !== id);
@@ -112,7 +101,6 @@ function del(id) {
   }
 }
 
-/* ------------------- EDIT ------------------- */
 function edit(id) {
   const task = tasks.find((t) => t.id === id);
   if (!task || task.isCompleted) return;
@@ -146,7 +134,6 @@ function edit(id) {
   inp.select();
 }
 
-/* ------------------- CLEAR COMPLETED ------------------- */
 function deleteCompletedItems() {
   const cnt = tasks.filter((t) => t.isCompleted).length;
   if (!cnt) return;
@@ -156,7 +143,6 @@ function deleteCompletedItems() {
   }
 }
 
-/* ------------------- FOOTER (counter + button) ------------------- */
 function updateFooter() {
   const total = tasks.length;
   const completed = tasks.filter((t) => t.isCompleted).length;
@@ -171,13 +157,11 @@ function updateFooter() {
   clearCompleted.style.display = completed ? "block" : "none";
 }
 
-/* ------------------- UTIL ------------------- */
 function escape(s) {
   const div = document.createElement("div");
   div.textContent = s;
   return div.innerHTML;
 }
 
-/* ------------------- INIT ------------------- */
 highlightFilter("all");
 render();
