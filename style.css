@@ -151,6 +151,7 @@ main {
   padding: 16px;
   align-items: center;
   border-radius: 8px;
+
 }
 .checkbox-container {
   display: flex;
@@ -187,7 +188,7 @@ main {
   width: 50%;
   display: flex;
   /* flex-direction: column; */
-  justify-content: space-around;
+  justify-content: end;
 }
 
 .completed-item {
@@ -196,7 +197,8 @@ main {
 .counter-container{
   width: 90%;
   height: 32px;
-  /* display: none; */
+  display: flex;
+  justify-self: unset;
 }
 .inner-counter {
   width: 100%;

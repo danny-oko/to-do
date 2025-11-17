@@ -70,6 +70,22 @@ function renderTasks() {
     filteredTasks = tasks.filter((t) => t.isCompleted);
   }
 
+  // all tasks
+  allTasksCount = tasks.length;
+  console.log("all tasks: " + allTasksCount);
+
+  // active tasks counter
+  const ActiveTasksCount = tasks.filter((t) => !t.isCompleted).length;
+  taskCounterText.textContent =
+    ActiveTasksCount === 1
+      ? `${ActiveTasksCount} task left`
+      : `${ActiveTasksCount} tasks left`;
+  console.log("active tasks counter:" + ActiveTasksCount);
+
+  // completed tasks counter
+  const completedTasksCount = tasks.filter((t) => t.isCompleted).length;
+  console.log("completed tasks: " + completedTasksCount);
+
   tasksContainer.innerHTML = "";
 
   if (filteredTasks.length === 0) {
@@ -80,6 +96,9 @@ function renderTasks() {
   }
 
   filteredTasks.forEach((task) => {
+    taskCounterText.innerHTML = `
+      <p> ${allTasksCount} of ${completedTasksCount} </p>
+    `;
     tasksContainer.innerHTML += `
       <div class="task-item" data-id="${task.id}">
         <div class="checkbox-container">
@@ -98,16 +117,11 @@ function renderTasks() {
           <button class="delete-btn" onclick="deleteTask(${
             task.id
           })">Delete</button>
-          <button class="edit-btn">Edit</button>
         </div>
       </div>
     `;
     taskCounter.style.display = "block";
   });
-  const activeTasksCount = tasks.filter.tasks((t) => !t.isCompleted).length;
-  taskCounterText.textContent = `${activeTasksCount} task${
-    activeTasksCount !== 1 ? "s" : ""
-  } left`;
 }
 
 // DELETE TASK
@@ -138,3 +152,5 @@ function markAsDone(taskId, checkbox) {
 // INITIAL
 highlightFilter("all");
 renderTasks();
+
+// <button class="edit-btn">Edit</button>
