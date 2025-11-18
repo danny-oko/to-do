@@ -86,7 +86,7 @@ function renderTasks() {
   console.log("completed tasks: " + completedTasksCount);
 
   tasksContainer.innerHTML = "";
-
+ 
   if (filteredTasks.length === 0) {
     taskCounter.style.display = "none";
     tasksContainer.innerHTML =

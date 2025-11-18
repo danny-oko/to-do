@@ -26,6 +26,8 @@ main {
   box-shadow: #00000029;
   background-color: #ffffff;
   padding: 32px;
+  box-shadow: #00000029 1px 0 1px 1px,
+    #0000001c 0px 1px 1px 0px;
 }
 .inner {
   width: 100%;
