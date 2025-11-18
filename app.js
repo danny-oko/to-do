@@ -58,7 +58,6 @@ function highlightFilter(type) {
   if (type === "completed") completedFilter.classList.add("selected");
 }
 
-// RENDER TASKS
 function renderTasks() {
   let filteredTasks = tasks;
 
@@ -124,7 +123,6 @@ function renderTasks() {
   });
 }
 
-// DELETE TASK
 function deleteTask(taskId) {
   if (confirm("Press 'OK' to delete this task.")) {
     tasks = tasks.filter((t) => t.id !== taskId);
@@ -133,23 +131,23 @@ function deleteTask(taskId) {
 }
 
 function deleteCompletedItems() {
+  if (tasks.filter((t) => t.isCompleted).length === 0) {
+    alert("There are no completed tasks to delete.");
+    return;
+  }
   if (confirm("Press 'OK' to delete all completed tasks.")) {
     tasks = tasks.filter((t) => !t.isCompleted);
     renderTasks();
-  } else if (!ActiveTasksCount === 0) {
-    console.log("No completed tasks to delete.");
-    alert("No completed tasks to delete.");
+    return;
   }
 }
 
-// MARK AS DONE
 function markAsDone(taskId, checkbox) {
   const task = tasks.find((t) => t.id === taskId);
   task.isCompleted = checkbox.checked;
   renderTasks();
 }
 
-// INITIAL
 highlightFilter("all");
 renderTasks();
 
