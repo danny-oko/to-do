@@ -50,34 +50,58 @@ function highlightFilter(type) {
   if (type === "completed") completedFilter.classList.add("selected");
 }
 
-function renderTasks() {
-  let filteredTasks = tasks;
-
+function getFilteredTasks() {
   if (currentFilterType === "active") {
-    filteredTasks = tasks.filter((t) => !t.isCompleted);
+    return tasks.filter((t) => !t.isCompleted);
   }
-
   if (currentFilterType === "completed") {
-    filteredTasks = tasks.filter((t) => t.isCompleted);
+    return tasks.filter((t) => t.isCompleted);
   }
+  return tasks;
+}
 
-  // all tasks
-  allTasksCount = tasks.length;
-  console.log("all tasks: " + allTasksCount);
-
-  const ActiveTasksCount = tasks.filter((t) => !t.isCompleted).length;
+function updateTaskCounter() {
+  const activeTasksCount = tasks.filter((t) => !t.isCompleted).length;
   taskCounterText.textContent =
-    ActiveTasksCount === 1
-      ? `${ActiveTasksCount} task left`
-      : `${ActiveTasksCount} tasks left`;
-  console.log("active tasks counter:" + ActiveTasksCount);
+    activeTasksCount === 1
+      ? `${activeTasksCount} task left`
+      : `${activeTasksCount} tasks left`;
+}
 
-  // completed tasks counter
-  const completedTasksCount = tasks.filter((t) => t.isCompleted).length;
-  console.log("completed tasks: " + completedTasksCount);
+function createTaskHTML(task) {
+  return `
+    <div class="task-item" data-id="${task.id}">
+      <div class="checkbox-container">
+        <input
+          class="checkbox"
+          type="checkbox"
+          ${task.isCompleted ? "checked" : ""}
+          onchange="markAsDone(${task.id}, this)"
+        >
+        <p class="task-text ${task.isCompleted ? "completed-item" : ""}">
+          ${task.text}
+        </p>
+      </div>
 
+      <div class="task-buttons-container">
+        <button class="delete-btn" onclick="deleteTask(${
+          task.id
+        })">Delete</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderTasks() {
+  const filteredTasks = getFilteredTasks();
+
+  // Update task counter
+  updateTaskCounter();
+
+  // Clear container
   tasksContainer.innerHTML = "";
 
+  // Handle empty state
   if (filteredTasks.length === 0) {
     taskCounter.style.display = "none";
     tasksContainer.innerHTML =
@@ -85,33 +109,10 @@ function renderTasks() {
     return;
   }
 
-  filteredTasks.forEach((task) => {
-    taskCounterText.innerHTML = `
-      <p> ${allTasksCount} of ${completedTasksCount} </p>
-    `;
-    tasksContainer.innerHTML += `
-      <div class="task-item" data-id="${task.id}">
-        <div class="checkbox-container">
-          <input
-            class="checkbox"
-            type="checkbox"
-            ${task.isCompleted ? "checked" : ""}
-            onchange="markAsDone(${task.id}, this)"
-          >
-          <p class="task-text ${task.isCompleted ? "completed-item" : ""}">
-            ${task.text}
-          </p>
-        </div>
-
-        <div class="task-buttons-container">
-          <button class="delete-btn" onclick="deleteTask(${
-            task.id
-          })">Delete</button>
-        </div>
-      </div>
-    `;
-    taskCounter.style.display = "block";
-  });
+  // Show counter and render tasks
+  taskCounter.style.display = "block";
+  const tasksHTML = filteredTasks.map(createTaskHTML).join("");
+  tasksContainer.innerHTML = tasksHTML;
 }
 
 function deleteTask(taskId) {
