@@ -109,7 +109,6 @@ function renderTasks() {
     return;
   }
 
-  // Show counter and render tasks
   taskCounter.style.display = "block";
   const tasksHTML = filteredTasks.map(createTaskHTML).join("");
   tasksContainer.innerHTML = tasksHTML;
