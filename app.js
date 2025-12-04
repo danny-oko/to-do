@@ -68,7 +68,7 @@ function updateTaskCounter() {
       : `${activeTasksCount} tasks left`;
 }
 
-function createTaskHTML(task) {
+function createTasks(task) {
   return `
     <div class="task-item" data-id="${task.id}">
       <div class="checkbox-container">
@@ -98,10 +98,9 @@ function renderTasks() {
   // Update task counter
   updateTaskCounter();
 
-  // Clear container
   tasksContainer.innerHTML = "";
 
-  // Handle empty state
+  // handle empty 
   if (filteredTasks.length === 0) {
     taskCounter.style.display = "none";
     tasksContainer.innerHTML =
@@ -110,7 +109,7 @@ function renderTasks() {
   }
 
   taskCounter.style.display = "block";
-  const tasksHTML = filteredTasks.map(createTaskHTML).join("");
+  const tasksHTML = filteredTasks.map(createTasks).join("");
   tasksContainer.innerHTML = tasksHTML;
 }
 
